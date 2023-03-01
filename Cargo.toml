@@ -50,5 +50,4 @@ harness = false
 
 [features]
 serde = ["our_serde", "curve25519-dalek/serde"]
-
 reusable_secrets = []
