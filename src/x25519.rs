@@ -100,7 +100,7 @@ impl EphemeralSecret {
 impl<'a> From<&'a EphemeralSecret> for PublicKey {
     /// Given an x25519 [`EphemeralSecret`] key, compute its corresponding [`PublicKey`].
     fn from(secret: &'a EphemeralSecret) -> PublicKey {
-        PublicKey((&ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
+        PublicKey((ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
     }
 }
 
@@ -217,7 +217,7 @@ impl From<[u8; 32]> for StaticSecret {
 impl<'a> From<&'a StaticSecret> for PublicKey {
     /// Given an x25519 [`StaticSecret`] key, compute its corresponding [`PublicKey`].
     fn from(secret: &'a StaticSecret) -> PublicKey {
-        PublicKey((&ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
+        PublicKey((ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
     }
 }
 
