@@ -1,11 +1,11 @@
 [package]
 name = "x25519-dalek"
-edition = "2018"
+edition = "2021"
 # Before changing this:
 # - update version in README.md
 # - update html_root_url
 # - update CHANGELOG
-version = "2.0.0-pre.2"
+version = "2.0.0-pre.1"
 authors = [
     "Isis Lovecruft <isis@patternsinthevoid.net>",
     "DebugSteven <debugsteven@gmail.com>",
