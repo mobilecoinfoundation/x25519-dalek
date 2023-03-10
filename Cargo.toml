@@ -30,10 +30,10 @@ travis-ci = { repository = "dalek-cryptography/x25519-dalek", branch = "master"}
 
 [package.metadata.docs.rs]
 #rustdoc-args = ["--html-in-header", ".cargo/registry/src/github.com-1ecc6299db9ec823/curve25519-dalek-1.0.1/docs/assets/rustdoc-include-katex-header.html"]
-features = ["serde"]
+features = ["serde", "precomputed-tables"]
 
 [dependencies]
-curve25519-dalek = { version = "4.0.0-rc.1", default-features = false, features = ["zeroize", "precomputed-tables"] }
+curve25519-dalek = { version = "4.0.0-rc.1", default-features = false, features = ["zeroize"] }
 rand_core = { version = "0.6", default-features = false, features = ["getrandom"] }
 # `serde` is renamed to `our_serde` in order to avoid a name collision between
 # importing the serde dependency and enabling the curve25519-dalek/serde feature
@@ -50,3 +50,4 @@ harness = false
 
 [features]
 serde = ["our_serde", "curve25519-dalek/serde"]
+precomputed-tables = ["curve25519-dalek/precomputed-tables"]

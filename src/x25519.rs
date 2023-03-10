@@ -14,7 +14,7 @@
 //! This implements x25519 key exchange as specified by Mike Hamburg
 //! and Adam Langley in [RFC7748](https://tools.ietf.org/html/rfc7748).
 
-use curve25519_dalek::constants::ED25519_BASEPOINT_TABLE;
+use curve25519_dalek::EdwardsPoint;
 use curve25519_dalek::montgomery::MontgomeryPoint;
 use curve25519_dalek::scalar::Scalar;
 use curve25519_dalek::traits::IsIdentity;
@@ -100,7 +100,7 @@ impl EphemeralSecret {
 impl<'a> From<&'a EphemeralSecret> for PublicKey {
     /// Given an x25519 [`EphemeralSecret`] key, compute its corresponding [`PublicKey`].
     fn from(secret: &'a EphemeralSecret) -> PublicKey {
-        PublicKey((ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
+        PublicKey(EdwardsPoint::mul_base(&secret.0).to_montgomery())
     }
 }
 
@@ -149,7 +149,7 @@ impl ReusableSecret {
 impl<'a> From<&'a ReusableSecret> for PublicKey {
     /// Given an x25519 [`ReusableSecret`] key, compute its corresponding [`PublicKey`].
     fn from(secret: &'a ReusableSecret) -> PublicKey {
-        PublicKey((&ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
+        PublicKey(EdwardsPoint::mul_base(&secret.0).to_montgomery())
     }
 }
 
@@ -217,7 +217,7 @@ impl From<[u8; 32]> for StaticSecret {
 impl<'a> From<&'a StaticSecret> for PublicKey {
     /// Given an x25519 [`StaticSecret`] key, compute its corresponding [`PublicKey`].
     fn from(secret: &'a StaticSecret) -> PublicKey {
-        PublicKey((ED25519_BASEPOINT_TABLE * &secret.0).to_montgomery())
+        PublicKey(EdwardsPoint::mul_base(&secret.0).to_montgomery())
     }
 }
 
