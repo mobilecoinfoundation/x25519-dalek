@@ -1,4 +1,4 @@
-use curve25519_dalek::constants::ED25519_BASEPOINT_TABLE;
+use curve25519_dalek::EdwardsPoint;
 use curve25519_dalek::scalar::Scalar;
 
 use x25519_dalek::*;
@@ -20,7 +20,7 @@ fn byte_basepoint_matches_edwards_scalar_mul() {
 
         let result = x25519(scalar_bytes, X25519_BASEPOINT_BYTES);
 
-        let expected = (ED25519_BASEPOINT_TABLE * &clamp_scalar(scalar_bytes))
+        let expected = (EdwardsPoint::mul_base( &clamp_scalar(scalar_bytes)))
             .to_montgomery()
             .to_bytes();
 
