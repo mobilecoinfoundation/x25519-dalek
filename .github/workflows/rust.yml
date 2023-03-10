@@ -23,7 +23,9 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --no-default-features -- --cfg curve25519_dalek_bits="32"
+        env:
+          RUSTFLAGS: '--cfg curve25519_dalek_backend="32"'
+        args: --no-default-features
 
   test-u64:
     name: Test u64 backend
@@ -38,7 +40,9 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --no-default-features -- --cfg curve25519_dalek_bits="64"
+        env:
+          RUSTFLAGS: '--cfg curve25519_dalek_backend="64"'
+        args: --no-default-features
 
   nightly:
     name: Test nightly compiler
