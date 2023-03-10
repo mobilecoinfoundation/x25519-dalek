@@ -5,10 +5,9 @@ rust:
 
 env:
   - TEST_COMMAND=test EXTRA_FLAGS='' FEATURES='default'
-  - TEST_COMMAND=test EXTRA_FLAGS='' FEATURES='nightly'
   - TEST_COMMAND=bench EXTRA_FLAGS='' FEATURES='default'
-  - TEST_COMMAND=build EXTRA_FLAGS='--no-default-features'
-  - TEST_COMMAND=build EXTRA_FLAGS='--no-default-features'
+  - TEST_COMMAND=build EXTRA_FLAGS='--no-default-features --cfg curve25519_dalek_bits="32"'
+  - TEST_COMMAND=build EXTRA_FLAGS='--no-default-features --cfg curve25519_dalek_bits="64"'
 
 matrix:
   include:

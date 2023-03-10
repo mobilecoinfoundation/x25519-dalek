@@ -23,7 +23,7 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --no-default-features
+        args: --no-default-features --cfg curve25519_dalek_bits="32"
 
   test-u64:
     name: Test u64 backend
@@ -38,7 +38,7 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --no-default-features --features "std u64_backend"
+        args: --no-default-features --cfg curve25519_dalek_bits="64"
 
   nightly:
     name: Test nightly compiler
@@ -53,7 +53,6 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --features "nightly"
 
   test-defaults-serde:
     name: Test default feature selection and serde
