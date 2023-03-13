@@ -20,7 +20,7 @@ fn byte_basepoint_matches_edwards_scalar_mul() {
 
         let result = x25519(scalar_bytes, X25519_BASEPOINT_BYTES);
 
-        let expected = (EdwardsPoint::mul_base( &clamp_scalar(scalar_bytes)))
+        let expected = (EdwardsPoint::mul_base(&clamp_scalar(scalar_bytes)))
             .to_montgomery()
             .to_bytes();
 
