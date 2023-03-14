@@ -13,6 +13,8 @@ jobs:
   test-u32:
     name: Test u32 backend
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: '--cfg curve25519_dalek_backend="32"'
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
@@ -23,11 +25,13 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --no-default-features --features "std u32_backend"
+        args: --no-default-features
 
   test-u64:
     name: Test u64 backend
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: '--cfg curve25519_dalek_backend="64"'
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
@@ -38,7 +42,7 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --no-default-features --features "std u64_backend"
+        args: --no-default-features
 
   nightly:
     name: Test nightly compiler
@@ -53,7 +57,6 @@ jobs:
     - uses: actions-rs/cargo@v1
       with:
         command: test
-        args: --features "nightly"
 
   test-defaults-serde:
     name: Test default feature selection and serde
@@ -71,14 +74,14 @@ jobs:
         args: --features "serde"
 
   msrv:
-    name: Current MSRV is 1.51
+    name: Current MSRV is 1.60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
       with:
         profile: minimal
-        toolchain: 1.51
+        toolchain: 1.60.0
         override: true
     - uses: actions-rs/cargo@v1
       with:

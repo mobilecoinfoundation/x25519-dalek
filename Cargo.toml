@@ -1,6 +1,6 @@
 [package]
 name = "x25519-dalek"
-edition = "2018"
+edition = "2021"
 # Before changing this:
 # - update version in README.md
 # - update html_root_url
@@ -30,11 +30,11 @@ travis-ci = { repository = "dalek-cryptography/x25519-dalek", branch = "master"}
 
 [package.metadata.docs.rs]
 #rustdoc-args = ["--html-in-header", ".cargo/registry/src/github.com-1ecc6299db9ec823/curve25519-dalek-1.0.1/docs/assets/rustdoc-include-katex-header.html"]
-features = ["nightly", "reusable_secrets", "serde"]
+features = ["serde", "precomputed-tables"]
 
 [dependencies]
-curve25519-dalek = { version = "4.0.0-pre.2", default-features = false }
-rand_core = { version = "0.6", default-features = false }
+curve25519-dalek = { version = "4.0.0-rc.1", default-features = false, features = ["zeroize"] }
+rand_core = { version = "0.6", default-features = false, features = ["getrandom"] }
 # `serde` is renamed to `our_serde` in order to avoid a name collision between
 # importing the serde dependency and enabling the curve25519-dalek/serde feature
 our_serde = { package = "serde", version = "1", default-features = false, optional = true, features = ["derive"] }
@@ -49,15 +49,5 @@ name = "x25519"
 harness = false
 
 [features]
-default = ["std", "u64_backend"]
 serde = ["our_serde", "curve25519-dalek/serde"]
-std = ["curve25519-dalek/std"]
-nightly = ["curve25519-dalek/nightly"]
-reusable_secrets = []
-u64_backend = ["curve25519-dalek/u64_backend"]
-u32_backend = ["curve25519-dalek/u32_backend"]
-fiat_u64_backend = ["curve25519-dalek/fiat_u64_backend"]
-fiat_u32_backend = ["curve25519-dalek/fiat_u32_backend"]
-
-[patch.crates-io]
-curve25519-dalek = { git = "https://github.com/mobilecoinfoundation/curve25519-dalek.git", rev = "8791722e0273762552c9a056eaccb7df6baf44d7" }
+precomputed-tables = ["curve25519-dalek/precomputed-tables"]
